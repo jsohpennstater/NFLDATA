@@ -6,39 +6,53 @@ require 'json'
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-
-Dir.foreach("./public/NFLjson/nflgame/gamecenter-json") do |file|
+file = "./2009101100.json"
+# Dir.foreach("./public/NFLjson/nflgame/gamecenter-json") do |file|
   game_data = File.read(file)
   sorted_game_data = JSON.parse(game_data)
   game_id = sorted_game_data.first.first
 
-  sorted_game_data[game_id].each do |key, data|
-    data.each do |key, data|
-      if key == "stats"
-        key.each do |stat_type, type_data|
-          type_data.each do |gsis, stat_data|
-            # Stat.create(
-            #   stat_type: stat_type,
-            #   att: stat_data["att"],
-            #   cmp: stat_data["cmp"],
-            #   yds: stat_data["yards"],
-            #   tds: stat_data["tds"],
-            #   gsis: gsis,
-            #   lng: stat_data["lng"],
-            #   if stat_data.include?("ints")
-            #     turn_overs: stat_data["ints"]
-            #   else
-            #     turn_overs: null
-            #   end
-            )
-          end
+  sorted_game_data[game_id]["home"]["stats"].each do |stat_type, type_data|
+    if stat_type == "passing" || stat_type == "rushing" || stat_type == "receiving"
+      type_data.each do |gsis, stat_data|
+        if gsis.length == 10
+          Stat.create(
+            stat_type: stat_type,
+            att: stat_data["att"],
+            cmp: stat_data["cmp"],
+            yds: stat_data["yds"],
+            tds: stat_data["tds"],
+            gsis: gsis,
+            lng: stat_data["lng"],
+            turn_overs: stat_data["ints"]
+          )
         end
       end
     end
   end
-end
 
-# PLAYER SEED DATA
+  sorted_game_data[game_id]["away"]["stats"].each do |stat_type, type_data|
+    if stat_type == "passing" || stat_type == "rushing" || stat_type == "receiving"
+      type_data.each do |gsis, stat_data|
+        if gsis.length == 10
+          Stat.create(
+            stat_type: stat_type,
+            att: stat_data["att"],
+            cmp: stat_data["cmp"],
+            yds: stat_data["yds"],
+            tds: stat_data["tds"],
+            gsis: gsis,
+            lng: stat_data["lng"],
+            turn_overs: stat_data["ints"]
+          )
+        end
+      end
+    end
+  end
+
+
+
+# PLAYER SEED LOGIC
 # player_data = File.read("./public/NFLjson/nflgame/players.json")
 # sorted_player_data = JSON.parse(player_data)
 #
