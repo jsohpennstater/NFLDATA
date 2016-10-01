@@ -5,18 +5,49 @@
   <li><%=@player.college%></li>
 </ul>
 
-<ul>
+<h2> Player Total Stat </h2>
   <% passingyds = 0 %>
-  <% receivingyds = 0 %>
-  <% rushingyds = 0 %>
+  <% passingtds = 0 %>
 
-  <li>Total Stat: Receiving </li>
+  <% receivingyds = 0 %>
+  <% receivingtds = 0 %>
+
+  <% rushingyds = 0 %>
+  <% rushingtds = 0 %>
+
+
+  <h4>Total Stat: Passing
     <% @stats.each do |stat| %>
-      <% if stat.stat_type == "receiving" %>
-        <%recyds += stat.yds %>
+      <% if stat.stat_type == "passing" %>
+        <%passingyds += stat.yds %>
+        <%passingtds += stat.tds %>
       <% end %>
     <% end %>
-  <li> <%= recyds %> </li>
-</ul>
+  <li> Passing Yards: <%= passingyds %> </li>
+  <li> Passing Touchdowns: <%= passingtds %> </li>
+</h4>
+
+  <h4>Total Stat: Receiving
+    <% @stats.each do |stat| %>
+      <% if stat.stat_type == "receiving" %>
+        <%receivingyds += stat.yds %>
+        <%receivingtds += stat.tds %>
+      <% end %>
+    <% end %>
+  <li> Receiving Yards: <%= receivingyds %> </li>
+  <li> Receiving Touchdowns: <%= receivingtds %> </li>
+</h4>
+
+  <h4>Total Stat: Rushing
+    <% @stats.each do |stat| %>
+      <% if stat.stat_type == "rushing" %>
+        <%rushingyds += stat.yds %>
+        <%rushingtds += stat.tds %>
+      <% end %>
+    <% end %>
+    <li> Rushing Yards: <%= rushingyds %> </li>
+    <li> Rushing Touchdowns: <%= rushingtds %> </li>
+  </h4>
+
 
 <%= link_to 'Back to players', players_path %>
