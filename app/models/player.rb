@@ -1,4 +1,5 @@
 class Player < ActiveRecord::Base
+  has_many :stats, :through => :playerstats
 
   validates :gsis, presence: true
   validates :first_name, presence: true
