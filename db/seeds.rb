@@ -7,6 +7,37 @@ require 'json'
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+Dir.foreach("./public/NFLjson/nflgame/gamecenter-json") do |file|
+  game_data = File.read(file)
+  sorted_game_data = JSON.parse(game_data)
+  game_id = sorted_game_data.first.first
+
+  sorted_game_data[game_id].each do |key, data|
+    data.each do |key, data|
+      if key == "stats"
+        key.each do |stat_type, type_data|
+          type_data.each do |gsis, stat_data|
+            # Stat.create(
+            #   stat_type: stat_type,
+            #   att: stat_data["att"],
+            #   cmp: stat_data["cmp"],
+            #   yds: stat_data["yards"],
+            #   tds: stat_data["tds"],
+            #   gsis: gsis,
+            #   lng: stat_data["lng"],
+            #   if stat_data.include?("ints")
+            #     turn_overs: stat_data["ints"]
+            #   else
+            #     turn_overs: null
+            #   end
+            )
+          end
+        end
+      end
+    end
+  end
+end
+
 # PLAYER SEED DATA
 # player_data = File.read("./public/NFLjson/nflgame/players.json")
 # sorted_player_data = JSON.parse(player_data)
