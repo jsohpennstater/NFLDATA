@@ -1,4 +1,5 @@
 require 'json'
+require 'pry'
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
 #
@@ -6,10 +7,12 @@ require 'json'
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-file = "./2009101100.json"
-# Dir.foreach("./public/NFLjson/nflgame/gamecenter-json") do |file|
-  game_data = File.read(file)
+Dir.foreach("./public/NFLjson/nflgame/gamecenter-json") do |file|
+  next if file == "." or file == ".."
+  
+  game_data = File.read("./public/NFLjson/nflgame/gamecenter-json/" + file)
   sorted_game_data = JSON.parse(game_data)
+
   game_id = sorted_game_data.first.first
 
   sorted_game_data[game_id]["home"]["stats"].each do |stat_type, type_data|
@@ -49,6 +52,7 @@ file = "./2009101100.json"
       end
     end
   end
+end
 
 
 
