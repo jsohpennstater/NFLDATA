@@ -1,3 +1,4 @@
+
 <p> <%= @player.first_name %> <%= @player.last_name %>   </p>
 <ul>
   <li>Years Pro: <%=@player.years_pro%></li>
@@ -5,8 +6,17 @@
 </ul>
 
 <ul>
-  <li>Total Attempts: <%= @total_attempts %></li>
-  <li>Total Yards: <%= @total_yards %></li>
+  <% passingyds = 0 %>
+  <% receivingyds = 0 %>
+  <% rushingyds = 0 %>
+
+  <li>Total Stat: Receiving </li>
+    <% @stats.each do |stat| %>
+      <% if stat.stat_type == "receiving" %>
+        <%recyds += stat.yds %>
+      <% end %>
+    <% end %>
+  <li> <%= recyds %> </li>
 </ul>
 
 <%= link_to 'Back to players', players_path %>

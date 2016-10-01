@@ -1,6 +1,7 @@
 require 'json'
 require 'pry'
 
+<<<<<<< HEAD
 # PLAYERSTATS SEED LOGIC
 # all_stats = Stat.all
 #
@@ -8,6 +9,14 @@ require 'pry'
 #   player_object = Player.find_by(gsis: single_stat.gsis)
 #   Playerstat.create(player: player_object, stat: single_stat)
 # end
+=======
+all_stats = Stat.all
+
+all_stats.each do |single_stat|
+  player_object = Player.find_by(gsis: single_stat.gsis)
+  Playerstat.create(player: player_object, stat: single_stat)
+end
+>>>>>>> origin/master
 
 # STAT TABLE SEED LOGIC
 # Dir.foreach("./public/NFLjson/nflgame/gamecenter-json") do |file|
