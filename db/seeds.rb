@@ -1,7 +1,7 @@
 require 'json'
 require 'pry'
 
-all_stats = [Stat.find(12412), Stat.find(1213), Stat.find(58686)]
+all_stats = Stat.all
 
 all_stats.each do |single_stat|
   player_object = Player.find_by(gsis: single_stat.gsis)
