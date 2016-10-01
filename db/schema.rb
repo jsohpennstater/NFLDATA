@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161001154934) do
+ActiveRecord::Schema.define(version: 20161001162557) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,6 +26,15 @@ ActiveRecord::Schema.define(version: 20161001154934) do
     t.index ["season_id"], name: "index_games_on_season_id", using: :btree
   end
 
+  create_table "gamestats", force: :cascade do |t|
+    t.integer  "game_id"
+    t.integer  "stat_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["game_id"], name: "index_gamestats_on_game_id", using: :btree
+    t.index ["stat_id"], name: "index_gamestats_on_stat_id", using: :btree
+  end
+
   create_table "players", force: :cascade do |t|
     t.string   "gsis",       null: false
     t.string   "first_name", null: false
@@ -35,6 +44,15 @@ ActiveRecord::Schema.define(version: 20161001154934) do
     t.string   "college",    null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "playerstats", force: :cascade do |t|
+    t.integer  "player_id"
+    t.integer  "stat_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["player_id"], name: "index_playerstats_on_player_id", using: :btree
+    t.index ["stat_id"], name: "index_playerstats_on_stat_id", using: :btree
   end
 
   create_table "seasons", force: :cascade do |t|

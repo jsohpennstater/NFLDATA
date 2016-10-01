@@ -4,7 +4,7 @@ class CreatePlayerstats < ActiveRecord::Migration[5.0]
       t.belongs_to :player, index:true
       t.belongs_to :stat, index:true
 
-      table.timestamps
+      t.timestamps
     end
   end
 end
