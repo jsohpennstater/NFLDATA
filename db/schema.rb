@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161001181150) do
+ActiveRecord::Schema.define(version: 20161004211901) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -62,16 +62,17 @@ ActiveRecord::Schema.define(version: 20161001181150) do
   end
 
   create_table "stats", force: :cascade do |t|
-    t.string   "stat_type",  null: false
+    t.string   "stat_type",      null: false
     t.integer  "att"
     t.integer  "cmp"
     t.integer  "yds"
     t.integer  "tds"
     t.integer  "turn_overs"
     t.integer  "lng"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string   "gsis",       null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.string   "gsis",           null: false
+    t.string   "matchup_number", null: false
   end
 
 end
