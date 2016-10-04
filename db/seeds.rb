@@ -24,6 +24,7 @@ Dir.foreach("./public/NFLjson/nflgame/gamecenter-json") do |file|
     if stat_type == "passing" || stat_type == "rushing" || stat_type == "receiving"
       type_data.each do |gsis, stat_data|
         if gsis.length == 10
+          binding.pry
           Stat.create(
             stat_type: stat_type,
             att: stat_data["att"],
@@ -59,6 +60,8 @@ Dir.foreach("./public/NFLjson/nflgame/gamecenter-json") do |file|
       end
     end
   end
+  
+  puts "*"
 end
 
 
