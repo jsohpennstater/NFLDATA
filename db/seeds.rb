@@ -1,14 +1,26 @@
 require 'json'
 require 'pry'
 
+# GAME SEED LOGIC
+game_data = File.read("./public/NFLjson/nflgame/schedule.json")
+sorted_game_data = JSON.parse(game_data)
+
+sorted_game_data.each do |game_key, game_data|
+  game_data.each do |matchup_number, stats|
+    puts matchup_number
+    Game.create(
+      
+    )
+  end
+end
 
 # PLAYERSTATS SEED LOGIC
-all_stats = Stat.all
-
-all_stats.each do |single_stat|
-  player_object = Player.find_by(gsis: single_stat.gsis)
-  Playerstat.create(player: player_object, stat: single_stat)
-end
+# all_stats = Stat.all
+#
+# all_stats.each do |single_stat|
+#   player_object = Player.find_by(gsis: single_stat.gsis)
+#   Playerstat.create(player: player_object, stat: single_stat)
+# end
 
 
 # STAT TABLE SEED LOGIC
