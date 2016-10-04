@@ -6,11 +6,19 @@ game_data = File.read("./public/NFLjson/nflgame/schedule.json")
 sorted_game_data = JSON.parse(game_data)
 
 sorted_game_data.each do |game_key, game_data|
-  game_data.each do |matchup_number, stats|
-    puts matchup_number
-    Game.create(
-      
-    )
+  if game_key == "games"
+    game_data.each do |matchup_number, stats|
+      Game.create(
+        matchup_number: matchup_number,
+        home_team: stats["home"],
+        away_team: stats["away"],
+        year: stats["year"],
+        season_type: stats["season_type"],
+        time: stats["time"],
+        wday: stats["wday"],
+        week: stats["week"]
+      )
+    end
   end
 end
 
