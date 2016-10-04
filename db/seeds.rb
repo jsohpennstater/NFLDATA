@@ -12,52 +12,54 @@ require 'pry'
 
 
 # STAT TABLE SEED LOGIC
-# Dir.foreach("./public/NFLjson/nflgame/gamecenter-json") do |file|
-#   next if file == "." or file == ".."
-#
-#   game_data = File.read("./public/NFLjson/nflgame/gamecenter-json/" + file)
-#   sorted_game_data = JSON.parse(game_data)
-#
-#   game_id = sorted_game_data.first.first
-#
-#   sorted_game_data[game_id]["home"]["stats"].each do |stat_type, type_data|
-#     if stat_type == "passing" || stat_type == "rushing" || stat_type == "receiving"
-#       type_data.each do |gsis, stat_data|
-#         if gsis.length == 10
-#           Stat.create(
-#             stat_type: stat_type,
-#             att: stat_data["att"],
-#             cmp: stat_data["cmp"],
-#             yds: stat_data["yds"],
-#             tds: stat_data["tds"],
-#             gsis: gsis,
-#             lng: stat_data["lng"],
-#             turn_overs: stat_data["ints"]
-#           )
-#         end
-#       end
-#     end
-#   end
-#
-#   sorted_game_data[game_id]["away"]["stats"].each do |stat_type, type_data|
-#     if stat_type == "passing" || stat_type == "rushing" || stat_type == "receiving"
-#       type_data.each do |gsis, stat_data|
-#         if gsis.length == 10
-#           Stat.create(
-#             stat_type: stat_type,
-#             att: stat_data["att"],
-#             cmp: stat_data["cmp"],
-#             yds: stat_data["yds"],
-#             tds: stat_data["tds"],
-#             gsis: gsis,
-#             lng: stat_data["lng"],
-#             turn_overs: stat_data["ints"]
-#           )
-#         end
-#       end
-#     end
-#   end
-# end
+Dir.foreach("./public/NFLjson/nflgame/gamecenter-json") do |file|
+  next if file == "." or file == ".."
+
+  game_data = File.read("./public/NFLjson/nflgame/gamecenter-json/" + file)
+  sorted_game_data = JSON.parse(game_data)
+
+  game_id = sorted_game_data.first.first
+
+  sorted_game_data[game_id]["home"]["stats"].each do |stat_type, type_data|
+    if stat_type == "passing" || stat_type == "rushing" || stat_type == "receiving"
+      type_data.each do |gsis, stat_data|
+        if gsis.length == 10
+          Stat.create(
+            stat_type: stat_type,
+            att: stat_data["att"],
+            cmp: stat_data["cmp"],
+            yds: stat_data["yds"],
+            tds: stat_data["tds"],
+            gsis: gsis,
+            lng: stat_data["lng"],
+            turn_overs: stat_data["ints"],
+            matchup_number: game_id
+          )
+        end
+      end
+    end
+  end
+
+  sorted_game_data[game_id]["away"]["stats"].each do |stat_type, type_data|
+    if stat_type == "passing" || stat_type == "rushing" || stat_type == "receiving"
+      type_data.each do |gsis, stat_data|
+        if gsis.length == 10
+          Stat.create(
+            stat_type: stat_type,
+            att: stat_data["att"],
+            cmp: stat_data["cmp"],
+            yds: stat_data["yds"],
+            tds: stat_data["tds"],
+            gsis: gsis,
+            lng: stat_data["lng"],
+            turn_overs: stat_data["ints"],
+            matchup_number: game_id
+          )
+        end
+      end
+    end
+  end
+end
 
 
 
