@@ -1,26 +1,34 @@
 require 'json'
 require 'pry'
 
-# GAME SEED LOGIC
-game_data = File.read("./public/NFLjson/nflgame/schedule.json")
-sorted_game_data = JSON.parse(game_data)
+# GAMESTATS SEED LOGIC
+# all_stats = Stat.all
+#
+# all_stats.each do |single_stat|
+#   game_object = Game.find_by(matchup_number: single_stat.matchup_number)
+#   Gamestat.create(game: game_object, stat: single_stat)
+# end
 
-sorted_game_data.each do |game_key, game_data|
-  if game_key == "games"
-    game_data.each do |matchup_number, stats|
-      Game.create(
-        matchup_number: matchup_number,
-        home_team: stats["home"],
-        away_team: stats["away"],
-        year: stats["year"],
-        season_type: stats["season_type"],
-        time: stats["time"],
-        wday: stats["wday"],
-        week: stats["week"]
-      )
-    end
-  end
-end
+# GAME SEED LOGIC
+# game_data = File.read("./public/NFLjson/nflgame/schedule.json")
+# sorted_game_data = JSON.parse(game_data)
+#
+# sorted_game_data.each do |game_key, game_data|
+#   if game_key == "games"
+#     game_data.each do |matchup_number, stats|
+#       Game.create(
+#         matchup_number: matchup_number,
+#         home_team: stats["home"],
+#         away_team: stats["away"],
+#         year: stats["year"],
+#         season_type: stats["season_type"],
+#         time: stats["time"],
+#         wday: stats["wday"],
+#         week: stats["week"]
+#       )
+#     end
+#   end
+# end
 
 # PLAYERSTATS SEED LOGIC
 # all_stats = Stat.all
