@@ -1,5 +1,4 @@
 class Game < ActiveRecord::Base
-  # belongs_to :season
   has_many :gamestats
   has_many :stats, through: :gamestats
 

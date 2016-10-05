@@ -49,5 +49,22 @@
     <li> Rushing Touchdowns: <%= rushingtds %> </li>
   </h4>
 
+  <h4> Game Stats </h4>
+  <ul>
+  <% @stats.each do |stat| %>
+    <br>
+    <% game = Game.find_by(matchup_number: stat.matchup_number) %>
+    <li><b><%= game.home_team %> vs <%= game.away_team %></b><br><em><%= game.wday %>, Week <%= game.week %> - <%= game.year %></em></li>
+    <br>
+    <b>Stats for game:</b>
+    <% if stat.stat_type == "receiving" %>
+      <%= stat.yds %> yards <%= stat.stat_type %>
+    <% else %>
+      <%= stat.att %> for <%= stat.yds %> yards <%= stat.stat_type %>
+    <% end %>
+    <br>
+  <% end %>
+</ul>
+
 
 <%= link_to 'Back to players', players_path %>
