@@ -52,27 +52,21 @@
   <h4> Game Stats </h4>
   <div>
   <% @stats.each do |stat| %>
-    <% if stat.stat_type == "rushing" %>
-      <div style="background-color:red;margin:10px;padding:10px">
-    <% end %>
-    <% if stat.stat_type == "receiving" %>
-      <div style="background-color:green;margin:10px;padding:10px">
-    <% end %>
-    <% if stat.stat_type == "passing" %>
-      <div style="background-color:orange;margin:10px;padding:10px">
-    <% end %>
-
     <% game = Game.find_by(matchup_number: stat.matchup_number) %>
-    <b><%= game.home_team %> vs <%= game.away_team %></b><br><em><%= game.wday %>, Week <%= game.week %> - <%= game.year %></em>
-    <br>
-    <b>Stats for game:</b>
-    <% if stat.stat_type == "receiving" %>
-      <%= stat.yds %> yards <%= stat.stat_type %>
-    <% else %>
-      <%= stat.att %> for <%= stat.yds %> yards <%= stat.stat_type %>
-    <% end %>
-    <br>
-    </div>
+      <% if !game.nil? %>
+        <%= game.season_type %>(<%= game.year %>, Week <%= game.week %>, <%= game.wday %>) @<%=game.home_team %> vs <%= game.away_team %> <br>
+        Stat Type: <%= stat.stat_type %> <br>
+        Att: <%= stat.att %> <br>
+        Comp: <%= stat.cmp %> <br>
+        Yards: <%= stat.yds %> <br>
+        Touchdowns: <%= stat.tds %> <br>
+        Long: <%= stat.lng %> <br>
+        Turnovers: <%= stat.turn_overs %> <br>
+        <br>
+        <br>
+      <% end %>
   <% end %>
   </div>
 <%= link_to 'Back to players', players_path %>
+
+</div>
