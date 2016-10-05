@@ -1,16 +1,15 @@
 <h1>Players</h1>
-<ul>
+
   <% current_letter = "" %>
+<ul>
   <% @players.each do |player| %>
     <% if player.last_name[0] != current_letter %>
       <% current_letter = player.last_name[0] %>
-      <hr>
-      <h1><%= current_letter %></h1>
-      <% displayname = player.last_name + ", " + player.first_name %>
-      <li><%= link_to displayname, player%></li>
-    <% else %>
-      <% displayname = player.last_name + ", " + player.first_name %>
-      <li><%= link_to displayname, player%></li>
+        <h1><%= current_letter %></h1>
+        <hr>
+        <li><% displayname = player.last_name + ", " + player.first_name %><%= link_to displayname, player%></li>
+      <% else %>
+        <li><% displayname = player.last_name + ", " + player.first_name %><%= link_to displayname, player%></li>
     <% end %>
   <% end %>
 </ul>
