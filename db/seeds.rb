@@ -1,6 +1,15 @@
 require 'json'
 require 'pry'
 
+#REMOVE PLAYERS W/NO STATS
+player_stats = Player.all
+
+player_stats.each do |player|
+  if player.stats.length == 0
+    Player.delete(player.id)
+  end
+end
+
 # GAMESTATS SEED LOGIC
 # all_stats = Stat.all
 #
